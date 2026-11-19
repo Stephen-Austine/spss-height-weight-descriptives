@@ -1,0 +1,20 @@
+# OS / editor
+.DS_Store
+._*
+__MACOSX/
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+*.egg-info/
+
+# MATLAB / Octave
+octave-workspace
+*.asv
+*.m~

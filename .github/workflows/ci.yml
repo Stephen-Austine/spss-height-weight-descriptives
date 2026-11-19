@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -r requirements.txt ruff
+      - run: ruff check .
+      - run: pytest
+      - name: Smoke-test the scripts
+        env:
+          MPLBACKEND: Agg
+        run: |
+          python reproduce_output.py
+          python inspect_sav.py data/dataset_2A.sav
